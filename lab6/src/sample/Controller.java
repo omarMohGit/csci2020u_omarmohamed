@@ -20,53 +20,59 @@ public class Controller {
     @FXML
     public void initialize(){
         gc=mCanvas.getGraphicsContext2D();
-        drawBar(125,230,avgHousingPricesByYear,avgCommercialPricesByYear,Color.RED,Color.BLUE,150);
+        drawBar(135,340,avgHousingPricesByYear,avgCommercialPricesByYear,Color.RED,Color.BLUE,155);
         drawPie(purchasesByAgeGroup,pieColours);
     }
-    public void drawBar(int x, int y, double [] purchaseInfo, double [] comInfo, Color color1,Color color2,int base){
+    public void drawBar(int x, int y, double [] purchaseInfo, double [] comInfo, Color color1,Color color2,int base) {
         double maxed = Double.NEGATIVE_INFINITY;
         double min = Double.MAX_VALUE;
 
         //Determines the biggest value in avgHousingpricesByYear
-        for(double newVal:purchaseInfo){
-            if(newVal > maxed){
-                maxed=newVal;
+        for (double newVal : purchaseInfo) {
+            if (newVal > maxed) {
+                maxed = newVal;
             }
-            if(newVal < min){
-                min=newVal;
+            if (newVal < min) {
+                min = newVal;
             }
         }
 
         //Determines the biggest value in avgCommercialPricesByYear
-        for(double newVal:comInfo){
-            if(newVal > maxed){
-                maxed=newVal;
+        for (double newVal : comInfo) {
+            if (newVal > maxed) {
+                maxed = newVal;
             }
-            if(newVal < min){
-                min=newVal;
+            if (newVal < min) {
+                min = newVal;
             }
         }
 
-        //creates main bargraph (blue)
-        double space= x/purchaseInfo.length;
+
+        //creates main bargraph
+        double space = (x/purchaseInfo.length);
         double begin = base;
         gc.setFill(color1);
-        for(double val : purchaseInfo){
-            double height = ((val - min) / (maxed - min)) * y;
-            gc.fillRect(begin - 80, (y - height) + 200, space, height+20);
-            begin += space * 2.5;
+        for (double val : purchaseInfo) {
+            double height = y*((val-min) / (maxed-min)) ;
+            gc.fillRect(begin-100,(y-height)+200, space, height+40);
+            begin=begin+space*2.0;
         }
 
-        //creates 2nd bar graph (red)
+        //creates 2nd bar graph
         gc.setFill(color2);
         begin = 150 + space;
-        for(double val : comInfo){
-            double height = ((val - min) / (maxed - min)) * y;
-            gc.fillRect(begin - 80, (y - height) + 200, space, height+20);
-            begin += space * 2.5;
+        for (double val : comInfo) {
+            double height = y*((val-min)/(maxed - min));
+            gc.fillRect(begin-100, (y-height) + 200, space,height+40);
+            begin=begin+space*2.0;
         }
 
+
     }
+
+
+
+
 
     public void drawPie(int[]purchaseInfo,Color[]pColors){
         double sum = 0;
@@ -79,7 +85,7 @@ public class Controller {
         for (int b = 0; b < purchaseInfo.length; b++) {
             gc.setFill(pColors[b]);
             double newAng=360*(purchaseInfo[b]/sum);
-            gc.fillArc(400,5,300,300,angleBeg,newAng,ArcType.ROUND);
+            gc.fillArc(600,5,300,300,angleBeg,newAng,ArcType.ROUND);
             angleBeg=angleBeg+newAng;
         }
     }
