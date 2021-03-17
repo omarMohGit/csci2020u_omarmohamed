@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<info>
+    <student ID="100751749">
+        <name>  Omar Mohamed </name>
+        <email> omar.mohamed6@ontariotechu.net</email>
+    </student>
+    <software-description>
+        Some description in text... Student's description
+    </software-description>
+</info>
